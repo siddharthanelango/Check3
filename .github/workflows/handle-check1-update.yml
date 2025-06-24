@@ -1,0 +1,25 @@
+name: Handle Check1 Updates
+on:
+  repository_dispatch:
+    types: [check1-updated]
+
+jobs:
+  process-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout check3
+        uses: actions/checkout@v4
+        
+      - name: Process Check1 Update
+        run: |
+          echo "Check1 was updated!"
+          echo "Latest commit ID: ${{ github.event.client_payload.commit_id }}"
+          echo "Commit message: ${{ github.event.client_payload.commit_message }}"
+          
+      # Add your custom logic here
+      - name: Your custom actions
+        run: |
+          # Use the commit ID for whatever you need
+          COMMIT_ID="${{ github.event.client_payload.commit_id }}"
+          echo "Processing commit: $COMMIT_ID"
+          # Add your processing logic here
