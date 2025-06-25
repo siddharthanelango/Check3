@@ -1,0 +1,16 @@
+name: Triggered by Repo A
+
+on:
+  repository_dispatch:
+    types: [trigger-from-repo-a]
+
+jobs:
+  run-on-dispatch:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Print information from Repo A
+        run: |
+          echo "Triggered by Repo A"
+          echo "Ref: ${{ github.event.client_payload.ref }}"
+          echo "Pusher: ${{ github.event.client_payload.pusher }}"
