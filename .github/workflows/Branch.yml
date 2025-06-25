@@ -14,3 +14,13 @@ jobs:
           echo "Triggered by Repo A"
           echo "Ref: ${{ github.event.client_payload.ref }}"
           echo "Pusher: ${{ github.event.client_payload.pusher }}"
+
+      - name: Checkout Repo B at specific ref
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.client_payload.ref }}
+
+      - name: Show last 5 commits
+        run: |
+          echo "Last 5 commits on ${{ github.event.client_payload.ref }}:"
+          git log -n 5 --oneline
